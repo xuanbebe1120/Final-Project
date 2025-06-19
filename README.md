@@ -1,7 +1,7 @@
 # 2025計算機組織期末專題
-### 1. Q1  GEM5 + NVMAIN BUILD-UP (40%) 
+### (Q1)  GEM5 + NVMAIN BUILD-UP (40%) 
 根據簡報上操作
-### 2. Enable L3 last level cache in GEM5 + NVMAIN (15%)
+### (Q2) Enable L3 last level cache in GEM5 + NVMAIN (15%)
 1. 在 gem5/configs/common/Caches.py 依照L2新增L3 cache
 ```
 class L3Cache(Cache):
@@ -13,6 +13,7 @@ class L3Cache(Cache):
     tgts_per_mshr = 12
     write_buffers = 8
 ```
+目的是定義L3 cache
 2.在gem5/configs/common/CacheConfig.py修改
 ```
        dcache_class, icache_class, l2_cache_class, walk_cache_class,l3_cache_class = \
@@ -71,6 +72,54 @@ class L3XBar(CoherentXBar):
     point_of_unification = True
 
 ```
-目的是定義L3的Bus
+目的是定義L3 Cache 的Bus
+
 4.到gem5/src/cpu/BaseCPU.py
+在開頭加上，導入剛剛寫好的L3XBar
+```
+from XBar import L3XBar
+```
+在addTwoLevelCacheHierarchy下面加上
+```
+    def addThreeLevelCacheHierarchy(self, ic, dc, l3c, iwc=None, dwc=None):
+        self.addPrivateSplitL1Caches(ic, dc, iwc, dwc)
+        self.toL3Bus = L3XBar() 
+        self.connectCachedPorts(self.toL3Bus)
+        self.l3cache = l3c
+        self.toL2Bus.master = self.l3cache.cpu_side
+        self._cached_ports = ['l3cache.mem_side']
+```
+目的是在 CPU 模型裡實現三層cache階層
+
+5. 到gem5/configs/common/Options.py在# Cache Options新增，用以啟用l3cache這個參數
+`parser.add_option("--l3cache", action="store_true")`
+### (Q3) Config last level cache to 2-way and full-way associative cache and test performance (15%)
+1.先將quicksort使用gcc --static 編譯成執行檔
+`gcc --static quicksort.c -o quicksort`
+2.將編譯出來的quicksort放到gem5的目錄下
+3.使用以下指令執行
+(1)2-way
+```
+./build/X86/gem5.opt configs/example/se.py \
+-c .quicksort --cpu-type=TimingSimpleCPU \
+--caches --l1i_size=32kB --l1d_size=32kB --l2cache --l2_size=128kB \
+--l3cache --l3_size=1MB --l3_assoc=2 --mem-type=NVMainMemory \
+--nvmain-config=../NVmain/Config/PCM_ISSCC_2012_4GB.config 
+```
+(2)Full-way
+```
+Gem5 block size預設是 64 Bytes
+block 數 = 1MB / 64B = 16384 blocks
+assoc = 16384
+```
+指令
+```
+./build/X86/gem5.opt configs/example/se.py \
+-c .quicksort --cpu-type=TimingSimpleCPU \
+--caches --l1i_size=32kB --l1d_size=32kB --l2cache --l2_size=128kB \
+--l3cache --l3_size=1MB --l3_assoc=16384 --mem-type=NVMainMemory \
+--nvmain-config=../NVmain/Config/PCM_ISSCC_2012_4GB.config 
+```
+
+
 
