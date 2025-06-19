@@ -133,16 +133,16 @@ LFU的核心概念是：
 ### (Q5) Test the performance of write back and write through policy based on 4-way associative cache with isscc_pcm(15%)
 (1)write back
 Gem5本身預設為write back，無須修改
+
 參考資料:https://www.gem5.org/documentation/general_docs/memory_system/classic_caches/
 (2)write through
 在gem5/src/mem/base.cc
 在BaseCache::access 1073 行加入以下的code
 ```
-        if (blk->isWritable()) {
+ if (blk->isWritable()) {
             PacketPtr writeclean_pkt = writecleanBlk(blk, pkt->req->getDest(), pkt->id);
             writebacks.push_back(writeclean_pkt);
         }
-
 ```
 
 
