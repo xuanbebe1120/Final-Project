@@ -91,7 +91,7 @@ from XBar import L3XBar
 ```
 目的是在 CPU 模型裡實現三層cache階層
 
-5. 到gem5/configs/common/Options.py在# Cache Options新增，用以啟用l3cache這個參數
+5.到gem5/configs/common/Options.py在# Cache Options新增，用以啟用l3cache這個參數
 `parser.add_option("--l3cache", action="store_true")`
 ### (Q3) Config last level cache to 2-way and full-way associative cache and test performance (15%)
 1.先將quicksort使用gcc --static 編譯成執行檔
