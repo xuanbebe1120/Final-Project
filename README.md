@@ -1,4 +1,4 @@
-# 2025計算機組織專題
+# 2025計算機組織期末專題
 ### 1. Q1  GEM5 + NVMAIN BUILD-UP (40%) 
 根據簡報上操作
 ### 2. Enable L3 last level cache in GEM5 + NVMAIN (15%)
