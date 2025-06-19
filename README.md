@@ -46,6 +46,7 @@ class L3Cache(Cache):
 ```
 `if options.l2cache and options.l3cache`:目的是為了設定只有L2、L3同時存在時，才啟用L3
 其餘是設定資料的流向，L2->tol3bus->L3->membus
+
 3.到gem5/src/mem/XBar.py 依照L2XBar新增L3XBar
 ```
 class L3XBar(CoherentXBar):
