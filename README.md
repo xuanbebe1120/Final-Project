@@ -121,6 +121,14 @@ assoc = 16384
 --l3cache --l3_size=1MB --l3_assoc=16384 --mem-type=NVMainMemory \
 --nvmain-config=../NVmain/Config/PCM_ISSCC_2012_4GB.config 
 ```
+### (Q4) Modify last level cache policy based on frequency based replacement policy (15%)
+在gem5/configs/common/Caches.py當中class L3Cache加入
+```
+replacement_policy = Param.BaseReplacementPolicy(LFURP(),"Replacement policy")
+```
+
+### 
+
 
 
 
