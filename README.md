@@ -127,7 +127,7 @@ assoc = 16384
 replacement_policy = Param.BaseReplacementPolicy(LFURP(),"Replacement policy")
 ```
 
-### 
+### (Q5) Test the performance of write back and write through policy based on 4-way associative cache with isscc_pcm(15%)
 
 
 
