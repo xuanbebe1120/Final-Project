@@ -1,4 +1,15 @@
 # 2025計算機組織期末專題
+
+## 總完成題數
+- [x] Q1(40%)
+- [x] Q2(15%)
+- [x] Q3(15%)
+- [x] Q4(15%)
+- [x] Q5(15%)
+- []  bonus(10%)
+
+
+
 ### (Q1)  GEM5 + NVMAIN BUILD-UP (40%) 
 根據簡報上操作
 ### (Q2) Enable L3 last level cache in GEM5 + NVMAIN (15%)
@@ -145,6 +156,10 @@ Gem5本身預設為write back，無須修改
             PacketPtr writeclean_pkt = writecleanBlk(blk, pkt->req->getDest(), pkt->id);
             writebacks.push_back(writeclean_pkt);
         }
+```
+使用指令:
+```
+
 ```
 
 
