@@ -12,7 +12,8 @@ quicksort、mupltiply的執行檔放在gem5目錄下
 
 Q3、Q4、Q5皆含有nvmain.txt(紀錄nvmain在terminal輸出的log)、stat.txt
 
-備註:Q3資料夾額外含有config.ini，用於給助教確認L3 cache的assoc，因為2way、fullway在miss rate上未有明顯的差異，猜測原因可能是因為L2 cache容量大，沒有太多資料進去L3 cache，沒有發生很多碰撞
+備註:Q3資料夾額外含有config.ini，用於給助教確認L3 cache的assoc
+因為2way、fullway在miss rate上未有明顯的差異，猜測原因可能是因為L2 cache容量大，沒有太多資料進去L3 cache，沒有發生很多碰撞
 ## 實作方法
 ### (Q1)  GEM5 + NVMAIN BUILD-UP (40%) 
 根據簡報上操作
