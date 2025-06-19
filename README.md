@@ -98,6 +98,7 @@ from XBar import L3XBar
 `gcc --static quicksort.c -o quicksort`
 2.將編譯出來的quicksort放到gem5的目錄下
 3.使用以下指令執行
+
 (1)2-way
 ```
 ./build/X86/gem5.opt configs/example/se.py \
